@@ -560,6 +560,7 @@ def generate_xml_data(data_dir: str, xsd_file_path: str, output_file: str, valid
     </EntityDeletes>
 </WCOData>"""
             f.write(data)
+            return
     constraints, name_map = parse_xsd(xsd_file_path=xsd_file_path)
     xsd_element_names = [info['name'] for info in constraints.values()]
     container_map = detect_container_map(constraints=constraints)
