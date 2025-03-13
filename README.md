@@ -13,8 +13,17 @@ poetry install --no-root
 
 ## How to build the docker image
 
-```docker build -t harbr_serv_exten_lnrs_xml_transform .```
+```docker build -t generate_xml .```
 
 ## How to run the docker image
 
-```docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output harbr_serv_exten_lnrs_xml_transform -s schema.xsd -o data.xml -t -d input```
+```
+sudo docker run -it  \
+  -v $(pwd)/input:/app/input \
+  -v $(pwd)/output:/app/output \
+  --env SCHEMA=value_for_schema \
+  --env OUTPUT_PATH=/app/output/data.xml \
+  --env INPUT_FOLDER=/app/input \
+  --env MOCK=true \
+  generate_xml /bin/bash
+```
