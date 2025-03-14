@@ -2,7 +2,6 @@
 FROM python:3.13-slim
 
 # Set environment variable placeholders
-ARG SCHEMA
 ARG OUTPUT_PATH
 ARG INPUT_FOLDER
 ARG MOCK=false

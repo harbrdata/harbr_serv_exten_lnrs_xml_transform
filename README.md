@@ -18,12 +18,11 @@ poetry install --no-root
 ## How to run the docker image
 
 ```
-sudo docker run -it  \
+sudo docker run -d  \
   -v $(pwd)/input:/app/input \
   -v $(pwd)/output:/app/output \
-  --env SCHEMA=value_for_schema \
   --env OUTPUT_PATH=/app/output/data.xml \
   --env INPUT_FOLDER=/app/input \
   --env MOCK=true \
-  generate_xml /bin/bash
+  generate_xml
 ```

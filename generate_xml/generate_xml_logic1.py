@@ -196,7 +196,7 @@ def load_parquet_data_polars_lazy(directory: str, table_names: list[str]):
             ]
             if parquet_files:
                 # Create a single LazyFrame by concatenating multiple scans
-                lazy_scans = [pl.scan_parquet(x) for x in parquet_files]
+                lazy_scans = [pl.scan_parquet(x, low_memory=True) for x in parquet_files]
                 dataframes[name] = pl.concat(lazy_scans, how="vertical")
     return dataframes
 
