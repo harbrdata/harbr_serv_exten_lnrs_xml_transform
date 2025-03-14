@@ -6,6 +6,8 @@ from multiprocessing import cpu_count
 import polars as pl
 from lxml import etree
 from tqdm import tqdm
+import re
+
 
 # Mapping of parquet files to class names
 parquet_map = {
@@ -396,9 +398,6 @@ def populate_children(parent_xml, parent_path, data_obj, constraints, name_map, 
             child_elem = etree.SubElement(parent_xml, real_tag)
             populate_children(child_elem, full_path, value, constraints, name_map, container_map)
         else:
-            # Scalar
-            if not value:
-                continue
             child_elem = etree.SubElement(parent_xml, real_tag)
             child_elem.text = None if (value is None or value == "") else str(value)
 
@@ -411,7 +410,7 @@ def _build_single_entity(entity_data, entity_path, constraints, name_map, contai
     entity_elem = etree.Element(entity_tag)
     populate_children(entity_elem, entity_path, entity_data, constraints, name_map, container_map)
     # Return as string so we don't try to pickle XML objects
-    return etree.tostring(entity_elem, encoding="unicode")
+    return etree.tostring(entity_elem, encoding='UTF-8')
 
 
 def _build_single_relationship(relationship_data, relationship_path, constraints, name_map, container_map):
@@ -422,7 +421,7 @@ def _build_single_relationship(relationship_data, relationship_path, constraints
     relationship_elem = etree.Element(relationship_tag)
     populate_children(relationship_elem, relationship_path, relationship_data,
                       constraints, name_map, container_map)
-    return etree.tostring(relationship_elem, encoding="unicode")
+    return etree.tostring(relationship_elem, encoding='UTF-8')
 
 
 def build_xml_from_wco_data(wco_data, constraints, name_map, container_map, processes=1):  # cpu_count()):
@@ -521,13 +520,20 @@ def build_xml_from_wco_data(wco_data, constraints, name_map, container_map, proc
 
 
 def write_xml_to_file(xml_root, output_file):
-    with open(output_file, 'wb') as f:
-        f.write(etree.tostring(
-            xml_root,
-            pretty_print=True,
-            xml_declaration=True,
-            encoding='UTF-8'
-        ))
+    # Generate XML string
+    xml_str = etree.tostring(
+        xml_root,
+        pretty_print=True,
+        xml_declaration=True,
+        encoding='UTF-8'
+    ).decode('utf-8')
+
+    # Ensure self-closing tags are written as <X /> instead of <X/>
+    xml_str = re.sub(r'(<\w+)(/>)', r'\1 />', xml_str)
+
+    # Write to file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(xml_str)
 
 
 def validate_xml(xml_path: str, xsd_file_path: str) -> bool:
