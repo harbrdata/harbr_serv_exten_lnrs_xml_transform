@@ -3,7 +3,7 @@ import os.path
 import time
 
 from generate_xml.generate_xml_logic1 import generate_xml_data as generate_xml_data1
-from generate_xml.generate_xml_logic4 import generate_xml_data as generate_xml_data2
+from generate_xml.generate_xml_logic2 import generate_xml_data as generate_xml_data2
 
 
 def get_argparse():
