@@ -13,7 +13,7 @@ poetry install --no-root
 
 ## How to build the docker image
 
-```docker build -t generate_xml .```
+```sudo docker build -t generate_xml .```
 
 ## How to run the docker image
 
@@ -23,6 +23,5 @@ sudo docker run -d  \
   -v $(pwd)/output:/app/output \
   --env OUTPUT_PATH=/app/output/data.xml \
   --env INPUT_FOLDER=/app/input \
-  --env MOCK=true \
   generate_xml
 ```
