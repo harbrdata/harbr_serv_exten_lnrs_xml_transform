@@ -173,6 +173,7 @@ def load_parquet_data_polars_lazy(directory: str):
     Returns a dict of {table_name: LazyFrame}, scanning parquet files in each subfolder.
     """
     dataframes = {}
+    print("load data")
     for name in ['entity', 'entity_element_details_consolidated', "entitydeletes",
                  "custom_feed_entity_match_type_lookup"]:
         folder = os.path.join(directory, name)
@@ -375,7 +376,7 @@ def build_xml_from_wco_data(df_map, constraints, name_map, container_map, proces
 
     # 3) Prepare an output XML file. We'll do incremental writes.
     # Adjust chunk_size as needed
-    chunk_size = 2500
+    chunk_size = 25000
 
     with open(output_file, "wb") as f_out:
         # Write the <Root> and <Entities> open tags
@@ -386,24 +387,10 @@ def build_xml_from_wco_data(df_map, constraints, name_map, container_map, proces
             proc = psutil.Process(os.getpid())
             print(
                 f"[Chunk {i}..{i + chunk_size}] Mem before aggregator slice: {proc.memory_info().rss / 1024 ** 2:.2f} MB")
-
+            from pdb import set_trace
             # (A) Build a lazy aggregator for "element" -> "value" strings
-            aggregator_lazy = (
-                entities.lazy()
-                .slice(i, chunk_size)
-                .join(data.lazy(), on="entityguid", how="inner")
-                .with_columns(
-                    pl.col("element").str.to_lowercase().alias("element")
-                )
-                # Group by entityguid + element, then combine their values into one string
-                .group_by(["entityguid", "element"])
-                .agg(
-                    pl.col("value").str.concat(", ")
-                )
-            )
+            aggregator_df = entities.lazy().slice(i, chunk_size).join(data.lazy(), on="entityguid", how="inner").with_columns(pl.col("element").str.to_lowercase().alias("element")).group_by(["entityguid", "element"]).agg(pl.col("value").str.concat(", ")).collect()
 
-            # (B) Collect aggregator_df
-            aggregator_df = aggregator_lazy.collect(streaming=True)
             aggregator_df.shrink_to_fit()
 
             print(
@@ -469,7 +456,7 @@ def build_xml_from_wco_data(df_map, constraints, name_map, container_map, proces
                 f_out.write(entity_str_indented.encode("utf-8"))
 
             # Clean up references, run GC
-            del aggregator_lazy, aggregator_df, aggregator_gb
+            del aggregator_df, aggregator_gb
             del chunk_df, result_df, build_entity_args, entities_xml_strings
             gc.collect()
 
