@@ -1,4 +1,14 @@
+import gc
+import json
+import os
 from collections import defaultdict
+from multiprocessing import Pool
+from multiprocessing import cpu_count
+
+import polars as pl
+import psutil
+from lxml import etree
+from tqdm import tqdm
 
 parquet_map = {
     'entity': 'Entity',
@@ -215,16 +225,6 @@ def create_single_segment_for_mutifield(parent_xml, data, table_name):
     return segment
 
 
-import os
-import gc
-import json
-import psutil
-from lxml import etree
-from tqdm import tqdm
-from multiprocessing import Pool
-import polars as pl
-
-
 def populate_children(parent_xml, parent_path, data_obj, constraints, name_map, container_map, all_data):
     """
     Recursively populates children of parent_xml using data_obj.
@@ -334,7 +334,7 @@ def _build_single_entity(data: dict, entity_path: str, constraints: dict, name_m
     return etree.tostring(entity_elem, encoding="unicode")
 
 
-def build_xml_from_wco_data(df_map, constraints, name_map, container_map, processes=1):
+def build_xml_from_wco_data(df_map, constraints, name_map, container_map, processes=cpu_count(), output_file=None):
     """
     Generates XML from wco_data in chunked mode, attempting to keep memory usage lower by:
       • Using smaller chunks (e.g., 2500).
@@ -374,7 +374,6 @@ def build_xml_from_wco_data(df_map, constraints, name_map, container_map, proces
     len_entities_table = entities.select(pl.count()).collect(streaming=True).item()
 
     # 3) Prepare an output XML file. We'll do incremental writes.
-    output_file = "output_incremental.xml"
     # Adjust chunk_size as needed
     chunk_size = 2500
 
@@ -526,9 +525,8 @@ def generate_xml_data(data_dir: str, xsd_file_path: str, output_file: str, valid
     process = psutil.Process(os.getpid())
     print(f"Memory usage before loading parquet data: {process.memory_info().rss / 1024 ** 2} MB")
 
-    xml_root = build_xml_from_wco_data(df_map=df_map, constraints=constraints, name_map=name_map,
-                                       container_map=container_map)
-    # write_xml_to_file(xml_root=xml_root, output_file=output_file)
+    build_xml_from_wco_data(df_map=df_map, constraints=constraints, name_map=name_map,
+                            container_map=container_map, output_file=output_file)
 
     if validate_output_xml:
         result = validate_xml(xml_path=output_file, xsd_file_path=xsd_file_path)
