@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="WCOData">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Entities" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Entity" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="EntityGUID" />
+                    <xs:element name="EntityTypeDesc" />
+                    <xs:element name="Gender" />
+                    <xs:element name="Name" />
+                    <xs:element name="FirstName" />
+                    <xs:element name="MiddleName" />
+                    <xs:element name="LastName" />
+                    <xs:element name="Prefix" />
+                    <xs:element name="Suffix" />
+                    <xs:element name="Title" />
+                    <xs:element name="IsDeceased" />
+                    <xs:element name="DeceasedDate">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DeceasedYear" />
+                          <xs:element name="DeceasedMonth" />
+                          <xs:element name="DeceasedDay" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityID" />
+                    <xs:element name="LookupID" />
+                    <xs:element name="LastUpdated" />
+                    <xs:element name="EntityAddresses" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityAddress" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAddressGUID" />
+                                <xs:element name="AddressTypeDesc" />
+                                <xs:element name="Address1" />
+                                <xs:element name="Address2" />
+                                <xs:element name="City" />
+                                <xs:element name="StateProvinceRegion" />
+                                <xs:element name="PostalCode" />
+                                <xs:element name="Country" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityAliases" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityAlias" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAliasGUID" />
+                                <xs:element name="AliasTypeDesc" />
+                                <xs:element name="EnglishDescription" />
+                                <xs:element name="Name" />
+                                <xs:element name="FirstName" />
+                                <xs:element name="MiddleName" />
+                                <xs:element name="LastName" />
+                                <xs:element name="Prefix" />
+                                <xs:element name="Suffix" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityCountryAssociations" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityCountryAssociation" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityCountryAssociationGUID" />
+                                <xs:element name="AssociationTypeDesc" />
+                                <xs:element name="AdministrativeUnitName" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="OwnershipPercentageCalc" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityDOBs" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityDOB" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityDOBGUID" />
+                                <xs:element name="BirthDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="BirthYear" />
+                                      <xs:element name="BirthMonth" />
+                                      <xs:element name="BirthDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityIdentifications" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityIdentification" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityIdentificationGUID" />
+                                <xs:element name="AdministrativeUnitName" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="IdentificationIssuer" />
+                                <xs:element name="IdentificationTypeDesc" />
+                                <xs:element name="IdentificationNumber" />
+                                <xs:element name="IssueDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="IssueYear" />
+                                      <xs:element name="IssueMonth" />
+                                      <xs:element name="IssueDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="ExpirationDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ExpirationYear" />
+                                      <xs:element name="ExpirationMonth" />
+                                      <xs:element name="ExpirationDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityPositions" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityPosition" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityPositionGUID" />
+                                <xs:element name="Position" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityRemarks" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityRemark" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityRemarkGUID" />
+                                <xs:element name="Remark" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntitySourceItems" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntitySourceItem" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySourceItemGUID" />
+                                <xs:element name="SourceURI" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntitySegments">
+                      <xs:complexType>
+                        <xs:all>
+                          <xs:element name="EntityAdverseMedias" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAdverseMedia" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityAdverseMediaGUID" />
+                                      <xs:element name="AdverseMediaDesc" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityAdverseMediaSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityAdverseMediaSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntityEnforcements" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityEnforcement" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityEnforcementGUID" />
+                                      <xs:element name="EnforcementDesc" />
+                                      <xs:element name="SourceName" />
+                                      <xs:element name="SourceNameAbbrev" />
+                                      <xs:element name="AdministrativeUnitName" />
+                                      <xs:element name="ISOStandard" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityEnforcementSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityEnforcementSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntityPEPs" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityPEP" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityPEPGUID" />
+                                      <xs:element name="IsPrimaryPEP" />
+                                      <xs:element name="IsActivePEP" />
+                                      <xs:element name="IsInCountryPEPOnly" />
+                                      <xs:element name="PEPAdminLevelDesc" />
+                                      <xs:element name="ISOAdministrativeUnitLevel0" />
+                                      <xs:element name="AdministrativeUnitLevel0" />
+                                      <xs:element name="AdministrativeUnitLevel1" />
+                                      <xs:element name="AdministrativeUnitLevel2" />
+                                      <xs:element name="AdministrativeUnitLevel3" />
+                                      <xs:element name="AdministrativeUnitLevel4" />
+                                      <xs:element name="GoverningInstitution" />
+                                      <xs:element name="GoverningRole" />
+                                      <xs:element name="EffectiveDate">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="EffectiveYear" />
+                                            <xs:element name="EffectiveMonth" />
+                                            <xs:element name="EffectiveDay" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="EffectiveDateTypeDesc" />
+                                      <xs:element name="ExpirationDate">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ExpirationYear" />
+                                            <xs:element name="ExpirationMonth" />
+                                            <xs:element name="ExpirationDay" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="ExpirationDateTypeDesc" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityPEPSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityPEPSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="SubCategoryDesc" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntitySanctions" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySanction" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntitySanctionGUID" />
+                                      <xs:element name="SubCategoryLabel" />
+                                      <xs:element name="SourceName" />
+                                      <xs:element name="SourceNameAbbrev" />
+                                      <xs:element name="AdministrativeUnitName" />
+                                      <xs:element name="ISOStandard" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="ConsolidatedSanction">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ConsolidatedSanctionGUID" />
+                                            <xs:element name="EntityGUID" />
+                                            <xs:element name="LastUpdated" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntitySOEs" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySOE" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntitySOEGUID" />
+                                      <xs:element name="IsActive" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntitySOEDomains" minOccurs="0" maxOccurs="100">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="EntitySOEDomain" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntitySOEDomainGUID" />
+                                                  <xs:element name="SOEDomainDesc" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="EntitySOESubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntitySOESubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="AdditionalSegments" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Segment" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Record" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="LastUpdated" />
+                                            <xs:element name="Field" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="DerivedName" />
+                                                  <xs:element name="DerivedValue" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="GUID" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Type" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:all>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Relationships" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Relationship" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="EntityGUID" />
+                    <xs:element name="EntityTypeDesc" />
+                    <xs:element name="Gender" />
+                    <xs:element name="Name" />
+                    <xs:element name="FirstName" />
+                    <xs:element name="MiddleName" />
+                    <xs:element name="LastName" />
+                    <xs:element name="Prefix" />
+                    <xs:element name="Suffix" />
+                    <xs:element name="Title" />
+                    <xs:element name="IsDeceased" />
+                    <xs:element name="DeceasedDate">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DeceasedYear" />
+                          <xs:element name="DeceasedMonth" />
+                          <xs:element name="DeceasedDay" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityID" />
+                    <xs:element name="LookupID" />
+                    <xs:element name="LastUpdated" />
+                    <xs:element name="EntityAddresses" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityAddress" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAddressGUID" />
+                                <xs:element name="AddressTypeDesc" />
+                                <xs:element name="Address1" />
+                                <xs:element name="Address2" />
+                                <xs:element name="City" />
+                                <xs:element name="StateProvinceRegion" />
+                                <xs:element name="PostalCode" />
+                                <xs:element name="Country" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityAliases" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityAlias" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAliasGUID" />
+                                <xs:element name="AliasTypeDesc" />
+                                <xs:element name="EnglishDescription" />
+                                <xs:element name="Name" />
+                                <xs:element name="FirstName" />
+                                <xs:element name="MiddleName" />
+                                <xs:element name="LastName" />
+                                <xs:element name="Prefix" />
+                                <xs:element name="Suffix" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityCountryAssociations" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityCountryAssociation" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityCountryAssociationGUID" />
+                                <xs:element name="AssociationTypeDesc" />
+                                <xs:element name="AdministrativeUnitName" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="OwnershipPercentageCalc" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityDOBs" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityDOB" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityDOBGUID" />
+                                <xs:element name="BirthDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="BirthYear" />
+                                      <xs:element name="BirthMonth" />
+                                      <xs:element name="BirthDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityIdentifications" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityIdentification" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityIdentificationGUID" />
+                                <xs:element name="AdministrativeUnitName" />
+                                <xs:element name="ISOStandard" />
+                                <xs:element name="IdentificationIssuer" />
+                                <xs:element name="IdentificationTypeDesc" />
+                                <xs:element name="IdentificationNumber" />
+                                <xs:element name="IssueDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="IssueYear" />
+                                      <xs:element name="IssueMonth" />
+                                      <xs:element name="IssueDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="ExpirationDate">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ExpirationYear" />
+                                      <xs:element name="ExpirationMonth" />
+                                      <xs:element name="ExpirationDay" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityPositions" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityPosition" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityPositionGUID" />
+                                <xs:element name="Position" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityRelationships" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityRelationship" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="RelatedEntityGUID" />
+                                <xs:element name="EntityRelationshipGUID" />
+                                <xs:element name="GroupDesc" />
+                                <xs:element name="RelationshipDesc" />
+                                <xs:element name="OwnershipPercentage" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntityRemarks" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntityRemark" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityRemarkGUID" />
+                                <xs:element name="Remark" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntitySourceItems" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="EntitySourceItem" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySourceItemGUID" />
+                                <xs:element name="SourceURI" />
+                                <xs:element name="LastUpdated" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="EntitySegments">
+                      <xs:complexType>
+                        <xs:all>
+                          <xs:element name="EntityAdverseMedias" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityAdverseMedia" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityAdverseMediaGUID" />
+                                      <xs:element name="AdverseMediaDesc" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityAdverseMediaSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityAdverseMediaSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntityEnforcements" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityEnforcement" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityEnforcementGUID" />
+                                      <xs:element name="EnforcementDesc" />
+                                      <xs:element name="SourceName" />
+                                      <xs:element name="SourceNameAbbrev" />
+                                      <xs:element name="AdministrativeUnitName" />
+                                      <xs:element name="ISOStandard" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityEnforcementSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityEnforcementSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntityPEPs" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntityPEP" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntityPEPGUID" />
+                                      <xs:element name="IsPrimaryPEP" />
+                                      <xs:element name="IsActivePEP" />
+                                      <xs:element name="IsInCountryPEPOnly" />
+                                      <xs:element name="PEPAdminLevelDesc" />
+                                      <xs:element name="ISOAdministrativeUnitLevel0" />
+                                      <xs:element name="AdministrativeUnitLevel0" />
+                                      <xs:element name="AdministrativeUnitLevel1" />
+                                      <xs:element name="AdministrativeUnitLevel2" />
+                                      <xs:element name="AdministrativeUnitLevel3" />
+                                      <xs:element name="AdministrativeUnitLevel4" />
+                                      <xs:element name="GoverningInstitution" />
+                                      <xs:element name="GoverningRole" />
+                                      <xs:element name="EffectiveDate">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="EffectiveYear" />
+                                            <xs:element name="EffectiveMonth" />
+                                            <xs:element name="EffectiveDay" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="EffectiveDateTypeDesc" />
+                                      <xs:element name="ExpirationDate">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ExpirationYear" />
+                                            <xs:element name="ExpirationMonth" />
+                                            <xs:element name="ExpirationDay" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="ExpirationDateTypeDesc" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntityPEPSubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntityPEPSubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="SubCategoryDesc" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntitySanctions" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySanction" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntitySanctionGUID" />
+                                      <xs:element name="SubCategoryLabel" />
+                                      <xs:element name="SourceName" />
+                                      <xs:element name="SourceNameAbbrev" />
+                                      <xs:element name="AdministrativeUnitName" />
+                                      <xs:element name="ISOStandard" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="ConsolidatedSanction">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="ConsolidatedSanctionGUID" />
+                                            <xs:element name="EntityGUID" />
+                                            <xs:element name="LastUpdated" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="EntitySOEs" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="EntitySOE" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="EntitySOEGUID" />
+                                      <xs:element name="IsActive" />
+                                      <xs:element name="LastUpdated" />
+                                      <xs:element name="EntitySOEDomains" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="EntitySOEDomain" minOccurs="0" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntitySOEDomainGUID" />
+                                                  <xs:element name="SOEDomainDesc" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="EntitySOESubcategories">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Subcategory" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EntitySOESubCategoryGUID" />
+                                                  <xs:element name="SubCategoryLabel" />
+                                                  <xs:element name="LastUpdated" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="AdditionalSegments" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Segment" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Record" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="LastUpdated" />
+                                            <xs:element name="Field" minOccurs="1" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="DerivedName" />
+                                                  <xs:element name="DerivedValue" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="GUID" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Type" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:all>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EntityDeletes" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EntityDelete" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="EntityGUID" />
+                    <xs:element name="DateDeleted" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

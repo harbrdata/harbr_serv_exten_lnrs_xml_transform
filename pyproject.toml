@@ -1,0 +1,33 @@
+[project]
+name = "generate-xml"
+version = "0.1.0"
+description = "Generate XML file from parquet file and xsd schema"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "pandas (>=2.2.3,<3.0.0)",
+    "xmlschema (>=3.4.3,<4.0.0)",
+    "pyarrow (>=19.0.0,<20.0.0)",
+    "dicttoxml (>=1.7.16,<2.0.0)",
+    "polars (>=1.23.0,<2.0.0)",
+    "lxml (>=5.3.1,<6.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "psutil (>=7.0.0,<8.0.0)"
+]
+
+[tool.poetry]
+name = "generate-xml"
+version = "0.1.0"
+description = ""
+include = ["generate_xml/*"]
+authors = ["Harbrdata"]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+generate_xml = "generate_xml.cli_generate_xml:cli_generate_xml"
