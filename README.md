@@ -8,20 +8,23 @@ poetry install --no-root
 ```
 
 ## How to use
-
-```poetry run generate_xml -s schema.xsd -o data.xml -t -d input```
+```export S3_INPUT='<s3 input path>'```
+```export S3_OUTPUT='<s3 export path>'```
+```poetry run generate_xml --s3_input ${S3_INPUT} --s3_output ${S3_OUTPUT}```
 
 ## How to build the docker image
 
-```sudo docker build -t generate_xml .```
+```docker build --platform linux/amd64 -t harbr_serv_exten_lnrs_xml_transform .```
 
-## How to run the docker image
+
+## How to run the docker image locally
 
 ```
-sudo docker run -d  \
-  -v $(pwd)/input:/app/input \
-  -v $(pwd)/output:/app/output \
-  --env OUTPUT_PATH=/app/output/data.xml \
-  --env INPUT_FOLDER=/app/input \
-  generate_xml
+docker run --rm \
+  -v ~/.aws:/root/.aws:ro \
+  -e AWS_PROFILE=<aws-profile> \
+  -e S3_INPUT="s3://your-input-bucket/path/" \
+  -e S3_OUTPUT="s3://your-output-bucket/path/" \
+  -e MOCK="true" \
+  harbr_serv_exten_lnrs_xml_transform
 ```
