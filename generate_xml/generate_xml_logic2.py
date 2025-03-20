@@ -481,8 +481,7 @@ def validate_xml(xml_path: str, xsd_file_path: str) -> bool:
     return result
 
 
-def generate_xml_data(data_dir: str, xsd_file_path: str, output_file: str, validate_output_xml: bool = False,
-                      mock: bool = False) -> None:
+def generate_xml_data(data_dir: str, output_file: str, xsd_file_path: str = "/app/schema.xsd", validate_output_xml: bool = False, mock: bool = False) -> None:
     if mock:
         with open(output_file, 'w') as f:
             data = """<?xml version='1.0' encoding='UTF-8'?>

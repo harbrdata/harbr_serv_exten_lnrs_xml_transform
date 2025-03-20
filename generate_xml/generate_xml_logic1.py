@@ -242,7 +242,7 @@ def merge_tables(df_map):
             df_map[parent_table] = x
         # After merging all child tables, place it back in df_map
         df_map[parent_table] = parent_df
-
+    print(df_map)
     entity_df = df_map["entity"]
 
     for table_name, child_df in df_map.items():
@@ -278,6 +278,11 @@ def build_wco_data_polars_lazy(df: pl.DataFrame, entitydeletes_df: pl.DataFrame)
          'entities': [...python dicts of entity data...],
          'relationships': [...python dicts of relationship data...]
       }
+    
+    To test single entity set
+    wco_data["entities"] = entity_list[:1]
+    wco_data["relationships"] = relations_list[:1]
+    wco_data['entitydeletes'] = entitydeletes_list[:1]
     """
     wco_data = {}
     entity_df = df.filter(pl.col("entity_match_type") == "matched_entity")
@@ -289,9 +294,9 @@ def build_wco_data_polars_lazy(df: pl.DataFrame, entitydeletes_df: pl.DataFrame)
         entitydeletes_list = entitydeletes_df.collect().to_dicts()
 
     entity_list = [i for i in entity_list if any(i.get(j) for j in additional_segments_tables_mutifield) and any(i.get(j) for j in additional_segments_tables_simple)]
-    wco_data["entities"] = entity_list[:1]
-    wco_data["relationships"] = relations_list[:1]
-    wco_data['entitydeletes'] = entitydeletes_list[:1]
+    wco_data["entities"] = entity_list
+    wco_data["relationships"] = relations_list
+    wco_data['entitydeletes'] = entitydeletes_list
     return wco_data
 
 
@@ -424,8 +429,9 @@ def _build_single_relationship(relationship_data, relationship_path, constraints
     return etree.tostring(relationship_elem, encoding='UTF-8')
 
 
-def build_xml_from_wco_data(wco_data, constraints, name_map, container_map, processes=1):  # cpu_count()):
+def build_xml_from_wco_data(wco_data, constraints, name_map, container_map, processes=cpu_count()):
     """
+    Set processes=1 in function args for testing.
     Converts wco_data → XML, building large lists (entities, relationships, etc.)
     in parallel without using JSON (uses default Python pickling).
     """
@@ -545,7 +551,7 @@ def validate_xml(xml_path: str, xsd_file_path: str) -> bool:
     return result
 
 
-def generate_xml_data(data_dir: str, xsd_file_path: str, output_file: str, validate_output_xml: bool = False, mock: bool=False) -> None:
+def generate_xml_data(data_dir: str, output_file: str, xsd_file_path: str = "/app/schema.xsd", validate_output_xml: bool = False, mock: bool = False) -> None:
     if mock:
         with open(output_file, 'w') as f:
             data = """<?xml version='1.0' encoding='UTF-8'?>

@@ -1,11 +1,11 @@
 #!/bin/sh
+set -ex
 
-set -e
-
-cmd="poetry run generate_xml -o ${OUTPUT_PATH} -t -d ${INPUT_FOLDER}"
-
+# Option 1: Pass the environment variables as arguments to the Python CLI
+cmd="poetry run generate_xml --s3_input ${S3_INPUT} --s3_output ${S3_OUTPUT}"
 if [ "${MOCK}" = "true" ]; then
-  cmd="$cmd -m"
+  cmd="$cmd --mock"
 fi
+
 echo "Running command: $cmd"
 exec $cmd

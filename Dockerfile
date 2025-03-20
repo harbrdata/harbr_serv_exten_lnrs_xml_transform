@@ -6,7 +6,7 @@ ARG OUTPUT_PATH
 ARG INPUT_FOLDER
 ARG MOCK=false
 WORKDIR /app
-
+COPY schema.xsd /app/schema.xsd
 COPY . /app
 
 # Install Poetry
