@@ -307,7 +307,7 @@ def create_single_segment_for_sigle_fields(parent_xml, data, table_name):
     record = etree.SubElement(segment, "Record")
     record.set("GUID", data[additional_segments_tables_simple.get(table_name).get("guid_col")])
     last_updated = etree.SubElement(record, "LastUpdated")
-    last_updated.text = data['lastupdated']
+    last_updated.text = str(data['lastupdated'])
 
     field = etree.SubElement(record, "Field")
     derived_name = etree.SubElement(field, "DerivedName")
@@ -325,7 +325,7 @@ def create_single_segment_for_mutifield(parent_xml, data, table_name):
     record = etree.SubElement(segment, "Record")
     record.set("GUID", data_first[additional_segments_tables_mutifield.get(table_name).get("guid_col")])
     last_updated = etree.SubElement(record, "LastUpdated")
-    last_updated.text = data_first['lastupdated']
+    last_updated.text = str(data_first['lastupdated'])
 
     for i in data:
         field = etree.SubElement(record, "Field")
