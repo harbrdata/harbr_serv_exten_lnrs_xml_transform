@@ -100,7 +100,7 @@ def main():
     if not os.path.exists(local_output):
         os.makedirs(local_output)
     
-    output_file = os.path.join(local_output, "Entites.xml")
+    output_file = os.path.join(local_output, "Entities.xml")
     print(f"Generating XML for input folder {local_input} into {output_file}")
     generate_xml_data(
         data_dir=local_input,
