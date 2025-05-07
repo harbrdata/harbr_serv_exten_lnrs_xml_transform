@@ -42,23 +42,18 @@ def copy_from_s3(s3_path: str, local_path: str):
         print(f"Downloading s3://{bucket}/{key} to {local_file_path}")
         s3.download_file(bucket, key, local_file_path)
 
-def copy_to_s3(local_folder: str, s3_path: str):
+def copy_to_s3(local_file: str, s3_folder: str):
     """
-    Uploads all files from local_folder to the destination S3 path (recursively).
+    Upload a single local file to "s3_folder"
     """
-    parsed = urllib.parse.urlparse(s3_path)
+    parsed = urllib.parse.urlparse(s3_folder)
     bucket = parsed.netloc
-    key_prefix = parsed.path.lstrip('/')
-    
-    s3 = boto3.client("s3")
-    
-    for root, dirs, files in os.walk(local_folder):
-        for file in files:
-            local_file_path = os.path.join(root, file)
-            relative_path = os.path.relpath(local_file_path, local_folder)
-            s3_key = os.path.join(key_prefix, relative_path).replace("\\", "/")
-            print(f"Uploading {local_file_path} to s3://{bucket}/{s3_key}")
-            s3.upload_file(local_file_path, bucket, s3_key)
+    prefix = parsed.path.lstrip('/')
+
+    if not prefix.endswith('/'):
+        prefix += '/'
+    key = f"{prefix}{os.path.basename(local_file)}"
+    boto3.client("s3").upload_file(local_file, bucket, key)
 
 def main():
     # Default values from environment variables
@@ -114,6 +109,7 @@ def main():
     xml_file = os.path.join(local_output, "Entities.xml")
     zip_name = f"{output_folder}.zip"
     zip_path = os.path.join(local_output, zip_name)
+    print(f"Creating ZIP file: {zip_path}")
     with pyzipper.AESZipFile(
         zip_path, 'w',
         compression=pyzipper.ZIP_DEFLATED,
@@ -122,11 +118,14 @@ def main():
         zf.setpassword(zip_password.encode())
         zf.setencryption(pyzipper.WZ_AES, nbits=256)
         # Store the XML at the root of the zip
+        print(f"Writing XML file {xml_file} to {zip_path}")
         zf.write(xml_file, arcname="Entities.xml")
-
+        print("Completed ZIP operations")
+    
     # Upload the ZIP to S3
-    print(f"Uploading encrypted ZIP {zip_name} to S3...")
+    print(f"Uploading encrypted ZIP {zip_name} to {args.s3_output}")
     copy_to_s3(zip_path, args.s3_output)
+    print("Transformation job completed")
 
 if __name__ == "__main__":
     main()
