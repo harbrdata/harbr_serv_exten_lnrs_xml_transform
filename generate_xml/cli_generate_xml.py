@@ -2,9 +2,20 @@ import os
 import argparse
 import boto3
 import urllib.parse
+import pyzipper
+import json
+from datetime import datetime
 
 from generate_xml.generate_xml_logic1 import generate_xml_data
 #from generate_xml.generate_xml_logic2 import generate_xml_data
+
+def _get_ssm_secret(secret_name: str) -> str:
+    """
+    Retrieve a secure string from SSM Parameter Store
+    """
+    ssm = boto3.client("ssm")
+    resp = ssm.get_parameter(Name=secret_name, WithDecryption=True)
+    return resp["Parameter"]["Value"]
 
 def copy_from_s3(s3_path: str, local_path: str):
     """
@@ -66,12 +77,30 @@ def main():
     local_output = "/app/output"
     print("Copying input data from S3...")
     copy_from_s3(args.s3_input, local_input)
+
+    # Read zip parameters from organization_details.json
+    org_json = os.path.join(local_input, "organization_details.json")
+    with open(org_json, "r") as jf:
+        org = json.load(jf)
+
+    code = org["client_three_letter_code"]
+    cut = org["product_cut"]
+    zip_secret = org["client_zip_remote_secret"]
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    if cut == "04":
+        label = "US_IRS_FATCA_FF"
+    else:
+        label = "WorldCompliancePlus"
+
+    output_folder = f"{code}{cut}XF_{label}_{ts}"
+    zip_password  = _get_ssm_secret(zip_secret)
     
     # Ensure output folder exists
     if not os.path.exists(local_output):
         os.makedirs(local_output)
     
-    output_file = os.path.join(local_output, "lnrs_output.xml")
+    output_file = os.path.join(local_output, "Entities.xml")
     print(f"Generating XML for input folder {local_input} into {output_file}")
     generate_xml_data(
         data_dir=local_input,
@@ -81,9 +110,23 @@ def main():
         mock=args.mock
     )
     
-    # Copy the generated XML files from app/output to the S3 output location
-    print("Uploading generated XML files to S3...")
-    copy_to_s3(local_output, args.s3_output)
+    # ZIP the Entities.xml with AES-256 + password
+    xml_file = os.path.join(local_output, "Entities.xml")
+    zip_name = f"{output_folder}.zip"
+    zip_path = os.path.join(local_output, zip_name)
+    with pyzipper.AESZipFile(
+        zip_path, 'w',
+        compression=pyzipper.ZIP_DEFLATED,
+        encryption=pyzipper.WZ_AES
+    ) as zf:
+        zf.setpassword(zip_password.encode())
+        zf.setencryption(pyzipper.WZ_AES, nbits=256)
+        # Store the XML at the root of the zip
+        zf.write(xml_file, arcname="Entities.xml")
+
+    # Upload the ZIP to S3
+    print(f"Uploading encrypted ZIP {zip_name} to S3...")
+    copy_to_s3(zip_path, args.s3_output)
 
 if __name__ == "__main__":
     main()
